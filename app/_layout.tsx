@@ -1,24 +1,45 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
+////
+import { useFonts } from "expo-font";
+import React from "react";
+import { ThemeProvider, useTheme } from "../contexts/ThemeContext";
+////
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
+function ThemedStack() {
+  const { theme, colors } = useTheme();
+
+  return (
+    <>
+      {/* Light theme → dark icons, other themes → light icons */}
+      <StatusBar
+        style={theme === "light" ? "dark" : "light"}
+        backgroundColor={colors.background}
+      />
+
+      <Stack screenOptions={{ headerShown: false }}>
+        {/* Tabs layout (the main app) */}
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack>
+    </>
+  );
+}
 
 export const unstable_settings = {
   anchor: '(tabs)',
 };
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
+  const [fontsLoaded] = useFonts({
+    "Roboto-Bold": require("@/assets/fonts/LTSaeada-Bold.otf"),
+    "Roboto-Regular": require("@/assets/fonts/LTSaeada-Regular.otf"),
+  });
 
+  if (!fontsLoaded) return null;
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
+    <ThemeProvider>
+      <ThemedStack />
     </ThemeProvider>
   );
 }

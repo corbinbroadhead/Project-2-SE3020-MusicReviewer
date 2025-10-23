@@ -1,35 +1,59 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { Ionicons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
+import { useTheme } from "../../contexts/ThemeContext";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+export default function TabsLayout() {
+  const { colors } = useTheme();
 
   return (
     <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+      screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: colors.tabBarActive,
+        tabBarInactiveTintColor: colors.tabBarInactive,
+        tabBarStyle: {
+          backgroundColor: colors.accent,
+          borderTopColor: "transparent",
+          paddingHorizontal: 20,
+          paddingTop: 8,
+          height: 80,
+          shadowOpacity: 0.7,
+          shadowRadius: 7,
+          shadowOffset: { width: 0, height: 3 },
+        },
+        tabBarIcon: ({ color, size }) => {
+          let iconName: keyof typeof Ionicons.glyphMap;
+          switch (route.name) {
+            case "create":
+              iconName = "add";
+              break;
+            case "rankings":
+              iconName = "trophy";
+              break;
+            case "recent":
+              iconName = "home";
+              break;
+            case "profile":
+              iconName = "person";
+              break;
+            case "settings-tab":
+              iconName = "settings";
+              break;
+            default:
+              iconName = "ellipse-outline";
+              break;
+          }
+
+          return <Ionicons name={iconName} size={26} color={color} />;
+        },
+      })}
+    >
+      <Tabs.Screen name="create" />
+      <Tabs.Screen name="rankings" />
+      <Tabs.Screen name="recent" />
+      <Tabs.Screen name="profile" />
+      <Tabs.Screen name="settings-tab" />
     </Tabs>
   );
 }
