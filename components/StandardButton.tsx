@@ -1,3 +1,4 @@
+import { useTheme } from "@/contexts/ThemeContext";
 import React from "react";
 import { Pressable, StyleSheet, Text, ViewStyle } from "react-native";
 
@@ -12,20 +13,23 @@ type Props = {
 export default function StandardButton({
   text,
   onPress,
-  backgroundColor = "gray",
-  textColor = "white",
+  backgroundColor,
+  textColor,
   style,
 }: Props) {
+  const { colors } = useTheme();
+  const bgColor = backgroundColor ?? colors.accent;
+  const txtColor = textColor ?? colors.text;
   return (
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [
         styles.button,
-        { backgroundColor: backgroundColor, opacity: pressed ? 0.8 : 1 },
+        { backgroundColor: bgColor, opacity: pressed ? 0.8 : 1 },
         style,
       ]}
     >
-      <Text style={[styles.text, { color: textColor }]}>{text}</Text>
+      <Text style={[styles.text, { color: txtColor }]}>{text}</Text>
     </Pressable>
   );
 }
@@ -44,5 +48,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     fontWeight: "bold",
+    fontFamily: "LTSaeada-Bold"
   },
 });

@@ -1,25 +1,21 @@
+import { useFonts } from "expo-font";
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-////
-import { useFonts } from "expo-font";
 import React from "react";
+import 'react-native-reanimated';
 import { ThemeProvider, useTheme } from "../contexts/ThemeContext";
-////
 
 function ThemedStack() {
   const { theme, colors } = useTheme();
 
   return (
     <>
-      {/* Light theme → dark icons, other themes → light icons */}
       <StatusBar
         style={theme === "light" ? "dark" : "light"}
         backgroundColor={colors.background}
       />
 
       <Stack screenOptions={{ headerShown: false }}>
-        {/* Tabs layout (the main app) */}
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       </Stack>
     </>

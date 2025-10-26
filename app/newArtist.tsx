@@ -31,17 +31,6 @@ export default function NewArtist() {
     if (confirmed) router.back();
   }
 
-  /*
-  const deleteArtist = async() => {
-    const confirmed = await getConfirmation("Are you sure you want to delete this artist? This is a destructive action!");
-    if(confirmed) removeData(id);
-  };
-
-  const deleteAllArtists = async() => {
-    const confirmed = await getConfirmation("Are you sure you want to delete ALL artists? This is a destructive action!");
-    if(confirmed) removeAllArtists();
-  };
-  */
   const getConfirmation = (message: string) => new Promise<boolean>((resolve)=>{
     Alert.alert(
         "Are you sure?",
@@ -57,13 +46,7 @@ export default function NewArtist() {
 
   return (
     <ScrollView style={{backgroundColor: colors.background}}>
-      <View style={{
-        flexGrow: 1,
-        alignItems: "center",
-        justifyContent: "flex-start",
-        width: "100%",
-        paddingHorizontal: 0,
-      }}>
+      <View style={{ flexGrow: 1, alignItems: "center", justifyContent: "flex-start", width: "100%", paddingHorizontal: 0 }}>
         <View style={{ width: "100%", alignItems: "center", marginTop: 80, paddingHorizontal: 20}}>
             <PressableTitle onPress={()=>router.back()} text="New Artist" size={32} marginBottom={20}></PressableTitle>
             <ImagePicker value={image} onImageChange={setImage} type="other" />

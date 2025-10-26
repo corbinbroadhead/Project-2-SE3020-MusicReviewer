@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   image: {
     width: 60,
     height: 60,
-    borderRadius: 6,
+    borderRadius: 65,
     backgroundColor: "#888"
   },
   infoContainer: {

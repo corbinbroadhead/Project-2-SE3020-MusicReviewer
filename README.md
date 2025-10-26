@@ -1,51 +1,17 @@
-# Welcome to your Expo app 👋
+# MusicReviewer
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Review your favorite artists' albums with the MusicReviewer app!
+You can add artists, review albums, and see your collection of reviews in a variety of ways. 
+Use the 'create' tab to get started (the "+" icon in the bottom left). Once you have an artist and/or a review, your collection has started! 
 
-## Get started
+## Wireframe Sketch
+![MusicReview sketch](./diagram.jpeg)#Project-2-SE3020-MusicReviewer
 
-1. Install dependencies
+## Human-Interface Guidelines
 
-   ```bash
-   npm install
-   ```
+From Apple's HIG, I have contemplated implememnting a couple of their recommendations. First, we have the icons section. Originally, the tab icons at the bottom had text underneath conveying the same message (under the home icon it said "home"). The text has been removed to follow Apple's recommendations, which has made for a cleaner look. Additionally, the profile icon has been updated from a person silhouette inside of a circle to just the person silhouette. This made the icons look more uniform.
 
-2. Start the app
+Secondly, I reviewed their piece about theming (dark/light modes). It is recommended that if you do not need to do anything special with your app's color scheme to keep it to the system settings. I decided to make a seasonal theme (which would be updated periodically if the app were distributed), so I will be using custom themes. It is not necessary for the functionality or brand of the app, so this is technically against the HIG.
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-# Project-2-SE3020-MusicReviewer
+Finally, the HIG has recommendations about showing Alerts. It suggests using alerts as sparingly as possible, as people do not appreciate being interrupted. It says to "avoid displaying alerts for common, undoable actions, even when they're destructive." Which is exactly something that I am doing, so I am once again defying the HIG. Give how close the 'delete' button on my screens is to the 'save' button and how close it is to the bottom of the screen -- meaning it is succeptible to being accidentally pressed -- I prefer to use an alert for confirmation. I would hate if I spent time writing a thoughtful review only to have the phone slip in my hand and delete it all. This is a safeguard against it, though I recognize it may sacrifice some of the user experience.
+# MusicReviewer

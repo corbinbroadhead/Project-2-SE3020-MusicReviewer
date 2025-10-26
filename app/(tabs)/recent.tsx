@@ -2,51 +2,22 @@ import AlbumReviewCard from "@/components/AlbumReviewCard";
 import ThemeBarChart from "@/components/ThemeBarChart";
 import TitleText from "@/components/TitleText";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useRecentReviews } from "@/hooks/useRecentReviews";
 import { useReviewStats } from "@/hooks/useReviewStats";
-import { getRecentReviews } from "@/utils/nukstorage";
-import React, { useEffect, useState } from "react";
-import {
-    ActivityIndicator,
-    RefreshControl,
-    ScrollView,
-    StyleSheet,
-    Text,
-    View,
-} from "react-native";
+import React from "react";
+import { ActivityIndicator, RefreshControl, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function Recent() {
-  const [reviews, setReviews] = useState<string[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
   const { colors } = useTheme();
-
   const { stats, loading: statsLoading, refresh: refreshStats } = useReviewStats();
-
-  const fetchData = async () => {
-    try {
-      const recent = await getRecentReviews(20);
-      setReviews(Array.isArray(recent) ? recent : []);
-    } catch (err) {
-      console.error("Error fetching data:", err);
-      setReviews([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const onRefresh = async () => {
-    setRefreshing(true);
-    await Promise.all([fetchData(), refreshStats()]);
-    setRefreshing(false);
+  const { reviews, loading, refreshing, onRefresh, refetch } = useRecentReviews(20);
+  const handleRefresh = async () => {
+    await Promise.all([onRefresh(), refreshStats()]);
   };
 
   if (loading || statsLoading) {
     return (
-      <View style={styles.center}>
+      <View style={[styles.center, { backgroundColor: colors.background }]}>
         <ActivityIndicator size="large" color="black" />
       </View>
     );
@@ -56,7 +27,7 @@ export default function Recent() {
     <ScrollView
       style={{ backgroundColor: colors.background }}
       refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
       }
     >
       <View style={styles.scrollContainer}>

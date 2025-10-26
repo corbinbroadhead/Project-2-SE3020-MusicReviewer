@@ -2,15 +2,7 @@ import StandardButton from "@/components/StandardButton";
 import TitleText from "@/components/TitleText";
 import { useTheme } from "@/contexts/ThemeContext";
 import React from "react";
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 
 const THEMES = [
   { key: "light", label: "Light" },

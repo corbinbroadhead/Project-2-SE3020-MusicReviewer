@@ -10,14 +10,7 @@ import { useArtistData } from "@/hooks/useArtistData";
 import { getAllReviewsByArtist, removeData } from "@/utils/nukstorage";
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import {
-    ActivityIndicator,
-    Alert,
-    ScrollView,
-    StyleSheet,
-    Text,
-    View,
-} from "react-native";
+import { ActivityIndicator, Alert, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function ArtistEditor() {
   const { id } = useLocalSearchParams();
@@ -25,16 +18,7 @@ export default function ArtistEditor() {
   const artistId = Array.isArray(id) ? id[0] : id;
   const { colors } = useTheme();
 
-  const {
-    loading,
-    rating,
-    comments,
-    image,
-    setRating,
-    setComments,
-    setImage,
-    save,
-  } = useArtistData(artistId as string);
+  const { loading, rating, comments, image, setRating, setComments, setImage, save } = useArtistData(artistId as string);
 
   const fetchData = async () => {
     const [allReviewData] = await Promise.all([
@@ -132,7 +116,7 @@ export default function ArtistEditor() {
 
         {/* Buttons */}
         <View style={styles.buttonContainer}>
-          <StandardButton text="Delete" onPress={deleteArtist} backgroundColor="red" />
+          <StandardButton text="Delete" onPress={deleteArtist} backgroundColor="red" textColor="white" />
           <StandardButton text="Save" onPress={captureData} />
         </View>
       </View>

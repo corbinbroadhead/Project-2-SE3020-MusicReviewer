@@ -11,13 +11,7 @@ import { useArtists } from "@/hooks/useArtists";
 import { useReviewData } from "@/hooks/useReviewData";
 import { removeData } from "@/utils/nukstorage";
 import { router, useLocalSearchParams } from "expo-router";
-import {
-    ActivityIndicator,
-    Alert,
-    ScrollView,
-    StyleSheet,
-    View,
-} from "react-native";
+import { ActivityIndicator, Alert, ScrollView, StyleSheet, View } from "react-native";
 
 export default function ReviewEditor() {
   const { id } = useLocalSearchParams();
@@ -27,20 +21,7 @@ export default function ReviewEditor() {
   const artistOptions = artists.map(a => ({ value: a, label: a }));
 
 
-  const {
-    loading,
-    title,
-    rating,
-    artist,
-    comments,
-    albumCover,
-    setTitle,
-    setRating,
-    setArtist,
-    setComments,
-    setAlbumCover,
-    save,
-  } = useReviewData(reviewId as string);
+  const { loading, title, rating, artist, comments, albumCover, setTitle, setRating, setArtist, setComments, setAlbumCover, save } = useReviewData(reviewId as string);
 
   const captureData = async () => {
     await save();
@@ -151,6 +132,7 @@ export default function ReviewEditor() {
             text="Delete"
             onPress={deleteReview}
             backgroundColor="red"
+            textColor="white"
           />
           <StandardButton text="Save" onPress={captureData} />
         </View>
